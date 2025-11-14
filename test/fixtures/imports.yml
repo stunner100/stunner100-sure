@@ -12,3 +12,8 @@ account:
   family: dylan_family
   type: AccountImport
   status: pending
+
+category:
+  family: dylan_family
+  type: CategoryImport
+  status: pending

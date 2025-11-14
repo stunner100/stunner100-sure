@@ -1,0 +1,7 @@
+name,color,parent_category,classification
+Income,#22c55e,,income
+Food & Drink,#f97316,,expense
+Groceries,#407706,Food & Drink,expense
+Dining Out,#fb923c,Food & Drink,expense
+Shopping,#3b82f6,,expense
+Transportation,#0ea5e9,,expense
