@@ -107,10 +107,10 @@ services:
       - key: OPENAI_ACCESS_TOKEN
         sync: false
 
-databases:
-  - name: patrick-finance-db
+  - type: redis
+    name: patrick-finance-redis
     plan: starter
 
-redis:
-  - name: patrick-finance-redis
+databases:
+  - name: patrick-finance-db
     plan: starter
