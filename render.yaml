@@ -22,25 +22,15 @@ services:
       - key: APP_DOMAIN
         sync: false
       - key: DB_HOST
-        fromDatabase:
-          name: patrick-finance-db
-          property: host
+        sync: false
       - key: DB_PORT
-        fromDatabase:
-          name: patrick-finance-db
-          property: port
+        sync: false
       - key: POSTGRES_DB
-        fromDatabase:
-          name: patrick-finance-db
-          property: database
+        sync: false
       - key: POSTGRES_USER
-        fromDatabase:
-          name: patrick-finance-db
-          property: user
+        sync: false
       - key: POSTGRES_PASSWORD
-        fromDatabase:
-          name: patrick-finance-db
-          property: password
+        sync: false
       - key: REDIS_URL
         fromService:
           name: patrick-finance-redis
@@ -76,25 +66,15 @@ services:
       - key: APP_DOMAIN
         sync: false
       - key: DB_HOST
-        fromDatabase:
-          name: patrick-finance-db
-          property: host
+        sync: false
       - key: DB_PORT
-        fromDatabase:
-          name: patrick-finance-db
-          property: port
+        sync: false
       - key: POSTGRES_DB
-        fromDatabase:
-          name: patrick-finance-db
-          property: database
+        sync: false
       - key: POSTGRES_USER
-        fromDatabase:
-          name: patrick-finance-db
-          property: user
+        sync: false
       - key: POSTGRES_PASSWORD
-        fromDatabase:
-          name: patrick-finance-db
-          property: password
+        sync: false
       - key: REDIS_URL
         fromService:
           name: patrick-finance-redis
@@ -113,7 +93,3 @@ services:
     ipAllowList:
       - source: 0.0.0.0/0
         description: Allow all (restrict in Render dashboard if needed)
-
-databases:
-  - name: patrick-finance-db
-    plan: standard
