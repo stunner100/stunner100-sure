@@ -58,7 +58,7 @@ services:
     env: docker
     plan: starter
     dockerfilePath: ./Dockerfile
-    startCommand: bundle exec sidekiq
+    dockerCommand: bundle exec sidekiq
     autoDeploy: true
     envVars:
       - key: RAILS_ENV
@@ -110,6 +110,9 @@ services:
   - type: redis
     name: patrick-finance-redis
     plan: starter
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: Allow all (restrict in Render dashboard if needed)
 
 databases:
   - name: patrick-finance-db
