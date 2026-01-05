@@ -16,7 +16,7 @@ en:
       forgot_password: Forgot your password?
       password: Password
       submit: Log in
-      title: Sure
+      title: Log in
       password_placeholder: Enter your password
       openid_connect: Sign in with OpenID Connect
       google_auth_connect: Sign in with Google

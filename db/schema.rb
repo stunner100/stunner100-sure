@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_15_100443) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_05_165538) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_15_100443) do
     t.uuid "accountable_id"
     t.decimal "balance", precision: 19, scale: 4
     t.string "currency"
-    t.virtual "classification", type: :string, as: "\nCASE\n    WHEN ((accountable_type)::text = ANY (ARRAY[('Loan'::character varying)::text, ('CreditCard'::character varying)::text, ('OtherLiability'::character varying)::text])) THEN 'liability'::text\n    ELSE 'asset'::text\nEND", stored: true
+    t.virtual "classification", type: :string, as: "\nCASE\n    WHEN ((accountable_type)::text = ANY ((ARRAY['Loan'::character varying, 'CreditCard'::character varying, 'OtherLiability'::character varying])::text[])) THEN 'liability'::text\n    ELSE 'asset'::text\nEND", stored: true
     t.uuid "import_id"
     t.uuid "plaid_account_id"
     t.decimal "cash_balance", precision: 19, scale: 4, default: "0.0"
@@ -400,7 +400,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_15_100443) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "currency", default: "USD"
+    t.string "currency", default: "GHS"
     t.string "locale", default: "en"
     t.string "stripe_customer_id"
     t.string "date_format", default: "%m-%d-%Y"
@@ -490,16 +490,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_15_100443) do
     t.string "currency"
     t.string "name"
     t.string "category"
+    t.string "category_parent"
+    t.string "category_color"
+    t.string "category_classification"
+    t.string "category_icon"
     t.string "tags"
     t.string "entity_type"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "exchange_operating_mic"
-    t.string "category_parent"
-    t.string "category_color"
-    t.string "category_classification"
-    t.string "category_icon"
     t.string "resource_type"
     t.boolean "active"
     t.string "effective_date"
@@ -828,8 +828,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_15_100443) do
     t.decimal "expected_amount_min", precision: 19, scale: 4
     t.decimal "expected_amount_max", precision: 19, scale: 4
     t.decimal "expected_amount_avg", precision: 19, scale: 4
-    t.index ["family_id", "merchant_id", "amount", "currency"], name: "idx_recurring_txns_merchant", unique: true, where: "(merchant_id IS NOT NULL)"
-    t.index ["family_id", "name", "amount", "currency"], name: "idx_recurring_txns_name", unique: true, where: "((name IS NOT NULL) AND (merchant_id IS NULL))"
+    t.index ["family_id", "merchant_id", "amount", "currency"], name: "idx_recurring_txns_on_family_merchant_amount_currency", unique: true
     t.index ["family_id", "status"], name: "index_recurring_transactions_on_family_id_and_status"
     t.index ["family_id"], name: "index_recurring_transactions_on_family_id"
     t.index ["merchant_id"], name: "index_recurring_transactions_on_merchant_id"
@@ -1069,8 +1068,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_15_100443) do
     t.datetime "updated_at", null: false
     t.string "currency"
     t.jsonb "locked_attributes", default: {}
-    t.uuid "category_id"
-    t.index ["category_id"], name: "index_trades_on_category_id"
     t.index ["security_id"], name: "index_trades_on_security_id"
   end
 
@@ -1220,7 +1217,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_15_100443) do
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "families"
   add_foreign_key "tool_calls", "messages"
-  add_foreign_key "trades", "categories"
   add_foreign_key "trades", "securities"
   add_foreign_key "transactions", "categories", on_delete: :nullify
   add_foreign_key "transactions", "merchants"

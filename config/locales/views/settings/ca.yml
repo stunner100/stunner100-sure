@@ -52,7 +52,7 @@ ca:
           body: Segur que vols restablir el teu compte? Això eliminarà tots els teus comptes, categories, comerços, etiquetes i altres dades. Aquesta acció no es pot desfer.
           title: Restablir el compte?
         confirm_reset_with_sample_data:
-          body: Segur que vols restablir el teu compte i carregar dades d'exemple? Això eliminarà les teves dades existents i les substituirà per dades de demostració perquè puguis explorar Sure amb seguretat.
+          body: Segur que vols restablir el teu compte i carregar dades d'exemple? Això eliminarà les teves dades existents i les substituirà per dades de demostració perquè puguis explorar l'app amb seguretat.
           title: Restablir el compte i carregar dades d'exemple?
         confirm_remove_invitation:
           body: Segur que vols eliminar la invitació per a %{email}?
@@ -118,4 +118,3 @@ ca:
       choose: Pujar foto
       choose_label: (opcional)
       change: Canvia la foto
-

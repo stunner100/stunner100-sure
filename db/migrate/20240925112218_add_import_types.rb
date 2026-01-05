@@ -38,6 +38,10 @@ class AddImportTypes < ActiveRecord::Migration[7.2]
       t.string :currency
       t.string :name
       t.string :category
+      t.string :category_parent
+      t.string :category_color
+      t.string :category_classification
+      t.string :category_icon
       t.string :tags
       t.string :entity_type
       t.text :notes
